@@ -12,6 +12,7 @@
 #include "count_change.c"
 #include "thegame.c"
 #include "slots.c"
+#include "grapher.c"
 #include <stdbool.h>
 
 /* colors */
@@ -21,7 +22,7 @@
 
 /* version */
 #define v_color "\x1b[38;5;27m"
-#define VERSION v_color"1.0"ANSI_COLOR_RESET
+#define VERSION v_color"1.1"ANSI_COLOR_RESET
 
 /* formatting */
 #define FEATURE_COLOR "\x1b[38;5;153m"
@@ -31,15 +32,6 @@
 #define INFO "["ANSI_COLOR_GREY1"INFO"ANSI_COLOR_RESET"] "
 
 #define SELECTION_LINE SELECTION_F"Select "COUNTER_COLOR"number"ANSI_COLOR_RESET" > "
-
-/* Function to quit and go home :) */
-void quit_f(void){
-    printf(INFO"Goodbye!\n");
-    printf("+----------------------------------+\n");
-    printf(ANSI_COLOR_GREY2" Developed by Austin Leonhirth \n Alternate usage: austin [feat]\n Exiting...\n\n");
-    exit(0);
-}
-
 
 /* struct feature 
     holds the name of the feature and the function to call
@@ -51,10 +43,10 @@ struct feature{
 
 /* list of features (MODULAR; APPEND AS NECESSARY) */
 struct feature features[] = {
-     {"count_change", count_change_f},
+     {"count_change",   count_change_f},
      {"the_gameington", thegame_f},
-     {"slots", slots_f},
-     {"quit",quit_f}
+     {"slots",          slots_f},
+     {"grapher_test",   graph_f}
 };
 
 
@@ -73,10 +65,9 @@ int main(int argc, char *argv[])
         repeat:
         /* Feature List */
         int listSize = sizeof(features)/sizeof(features[0]);
-        for(int i = 0; i < listSize-1; i++){
+        for(int i = 0; i < listSize; i++){
             printf(INDENT"%s "COUNTER_COLOR"%d\n", features[i].name, i+1);
         }
-        printf(ANSI_COLOR_RESET"  ㄴ\x1b[38;2;250;130;130m%s \x1b[38;2;234;11;21m%d\n", features[listSize-1].name,listSize);
         printf(ANSI_COLOR_RESET"\n");
 
         /* Feature Selection */
@@ -95,7 +86,6 @@ int main(int argc, char *argv[])
         if(again){goto repeat;}
 
         /* program end */
-        quit_f();
     }
 
     //TODO

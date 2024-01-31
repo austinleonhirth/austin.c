@@ -37,5 +37,5 @@ void count_change_f(){
         printf("Invalid input. Enter amount in USD: $");
         while(getchar() != '\n');
     }
-    printf("Number of ways to make change: "ANSI_COLOR_Bright_Green"%d\n"ANSI_COLOR_RESET, count_change(amount));
+    printf("Number of ways to make change: "ANSI_COLOR_Bright_Green"%d\n\n"ANSI_COLOR_RESET, count_change(amount));
 }
